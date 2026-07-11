@@ -131,18 +131,17 @@ PlasmoidItem {
     }
 
     compactRepresentation: RowLayout {
-        spacing: 2
+        spacing: 4
 
         Repeater {
             model: root.days
             delegate: Rectangle {
                 required property var modelData
-                width: Math.max(6, Kirigami.Units.iconSizes.small * 0.5)
+                width: Math.max(6, Kirigami.Units.iconSizes.small * 0.75)
                 height: width
-                radius: 2
+                radius: 3
                 color: root.colorForLevel(modelData.level)
-                border.width: 1
-                border.color: Qt.darker(color, 1.3)
+
 
                 QQC2.ToolTip.visible: squareMouse.containsMouse
                 QQC2.ToolTip.text: modelData.date + ": " + modelData.count + " contribution" + (modelData.count === 1 ? "" : "s")
