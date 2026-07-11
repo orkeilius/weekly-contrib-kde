@@ -9,8 +9,8 @@
         "Category": "Utilities",
         "Description": "Shows the last 7 days of GitHub contribution activity as colored squares in the panel, similar to the GNOME Weekly Commits extension.",
         "Icon": "code-context",
-        "Id": "com.github.weeklycontributions",
-        "Name": "%{APPNAME}",
+        "Id": "com.github.weekly-commits-kde",
+        "Name": "weekly-commits-kde",
         "Version": "1.0"
     },
     "X-Plasma-API-Minimum-Version": "6.0"

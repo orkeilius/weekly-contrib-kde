@@ -16,18 +16,18 @@ Because I was too lazy to learn how to make plasmoid
 **Requires Plasma 6.**
 
 ```bash
-kpackagetool6 -t Plasma/Applet -i weekly-commit-kde.plasmoid
+kpackagetool6 -t Plasma/Applet -i weekly-commits-kde.plasmoid
 ```
 
 To remove:
 
 ```bash
-kpackagetool6 -t Plasma/Applet -r com.github.weekly-commit-kde
+kpackagetool6 -t Plasma/Applet -r com.github.weekly-commits-kde
 ```
 
 ## Configure
 
-Right-click the widget → **Configure Weekly GitHub Contributions**:
+Right-click the widget → **Configure Weekly commits kde**:
 
 - **GitHub username** — required.
 - **Refresh interval** — how often it polls GitHub (default 30 min).
@@ -37,8 +37,8 @@ Right-click the widget → **Configure Weekly GitHub Contributions**:
 To build and run, execute these command
 
 ```bash
-zip -r weekly-commit-kde.plasmoid ./metadata.json ./contents/
-kpackagetool6 -t Plasma/Applet -u weekly-commit-kde.plasmoid
+zip -r weekly-commits-kde.plasmoid ./metadata.json ./contents/
+kpackagetool6 -t Plasma/Applet -u weekly-commits-kde.plasmoid
 systemctl restart --user plasma-plasmashell.service
 ```
 

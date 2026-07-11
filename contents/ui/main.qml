@@ -25,7 +25,7 @@ PlasmoidItem {
     ]
 
     Plasmoid.icon: "code-context"
-    toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly GitHub Contributions"
+    toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
     toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
 
     preferredRepresentation: compactRepresentation
@@ -167,7 +167,7 @@ PlasmoidItem {
         spacing: Kirigami.Units.smallSpacing
 
         PlasmaComponents.Label {
-            text: root.username.length ? ("GitHub \u2014 " + root.username) : "Weekly GitHub Contributions"
+            text: root.username.length ? ("GitHub \u2014 " + root.username) : "Weekly Commits KDE"
             font.bold: true
         }
 
