@@ -8,8 +8,6 @@ import org.kde.kirigami as Kirigami
 PlasmoidItem {
     id: root
 
-
-
     readonly property string username: plasmoid.configuration.username
     readonly property int refreshMinutes: plasmoid.configuration.refreshInterval
     property var days: []
