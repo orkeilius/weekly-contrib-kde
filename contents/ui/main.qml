@@ -28,7 +28,7 @@ PlasmoidItem {
     toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
     toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
 
-    preferredRepresentation: compactRepresentation
+    preferredRepresentation: fullRepresentation
 
     function colorForLevel(level) {
         return levelColors[Math.max(0, Math.min(4, level))];
@@ -130,7 +130,7 @@ PlasmoidItem {
         onTriggered: root.refresh()
     }
 
-    compactRepresentation: RowLayout {
+    fullRepresentation: RowLayout {
         spacing: 4
 
         Repeater {
@@ -144,7 +144,7 @@ PlasmoidItem {
 
 
                 QQC2.ToolTip.visible: squareMouse.containsMouse
-                QQC2.ToolTip.text: modelData.date + ": " + modelData.count + " contribution" + (modelData.count === 1 ? "" : "s")
+                QQC2.ToolTip.text: root.errorMessage.length ? root.errorMessage : (modelData.date + ": " + modelData.count + " contribution" + (modelData.count === 1 ? "" : "s"))
 
                 MouseArea {
                     id: squareMouse
@@ -158,82 +158,5 @@ PlasmoidItem {
                 }
             }
         }
-    }
-
-    fullRepresentation: ColumnLayout {
-        Layout.preferredWidth: Kirigami.Units.gridUnit * 16
-        Layout.preferredHeight: Kirigami.Units.gridUnit * 9
-        Layout.margins: Kirigami.Units.smallSpacing
-        spacing: Kirigami.Units.smallSpacing
-
-        PlasmaComponents.Label {
-            text: root.username.length ? ("GitHub \u2014 " + root.username) : "Weekly Commits KDE"
-            font.bold: true
-        }
-
-        RowLayout {
-            spacing: Kirigami.Units.smallSpacing
-
-            Repeater {
-                model: root.days
-                delegate: ColumnLayout {
-                    required property var modelData
-                    spacing: 2
-
-                    Rectangle {
-                        Layout.preferredWidth: Kirigami.Units.gridUnit
-                        Layout.preferredHeight: Kirigami.Units.gridUnit
-                        radius: 3
-                        color: root.colorForLevel(modelData.level)
-                        border.width: 1
-                        border.color: Qt.darker(color, 1.3)
-
-                        QQC2.ToolTip.visible: dayMouse.containsMouse
-                        QQC2.ToolTip.text: modelData.date + ": " + modelData.count + " contribution" + (modelData.count === 1 ? "" : "s")
-
-                        MouseArea {
-                            id: dayMouse
-                            anchors.fill: parent
-                            hoverEnabled: true
-                        }
-                    }
-
-                    PlasmaComponents.Label {
-                        text: modelData.label
-                        font.pixelSize: Kirigami.Units.smallSpacing * 3.5
-                        horizontalAlignment: Text.AlignHCenter
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-                }
-            }
-        }
-
-        PlasmaComponents.Label {
-            visible: root.errorMessage.length > 0
-            text: root.errorMessage
-            color: Kirigami.Theme.negativeTextColor
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
-        }
-
-        Item { Layout.fillHeight: true }
-
-        RowLayout {
-            PlasmaComponents.Button {
-                text: root.loading ? "Refreshing\u2026" : "Refresh now"
-                enabled: !root.loading
-                onClicked: root.refresh()
-            }
-            Item { Layout.fillWidth: true }
-            PlasmaComponents.Label {
-                text: "Data via GitHub public events API"
-                opacity: 0.6
-                font.pixelSize: Kirigami.Units.smallSpacing * 3.2
-            }
-        }
-    }
-
-    Component.onCompleted: {
-        days = buildEmptyDays();
     }
 }
