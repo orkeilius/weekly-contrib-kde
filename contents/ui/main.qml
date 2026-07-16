@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 
@@ -27,8 +28,15 @@ PlasmoidItem {
     Plasmoid.icon: "code-context"
     toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
     toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
-
     preferredRepresentation: fullRepresentation
+
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: "Refresh now"
+            icon.name: "view-refresh"
+            onTriggered: root.refresh()
+        }
+    ]
 
     function colorForLevel(level) {
         return levelColors[Math.max(0, Math.min(4, level))];
