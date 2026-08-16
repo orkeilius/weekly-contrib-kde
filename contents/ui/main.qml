@@ -25,10 +25,10 @@ PlasmoidItem {
         "#39d353"
     ]
 
-    Plasmoid.icon: "code-context"
-    toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
-    toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
-    preferredRepresentation: fullRepresentation
+    //Plasmoid.icon: "code-context"
+    //toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
+    //toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
+    preferredRepresentation: compactRepresentation
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
@@ -138,33 +138,30 @@ PlasmoidItem {
         onTriggered: root.refresh()
     }
 
+    compactRepresentation: RowLayout {
+      spacing: 4
+
+      Repeater {
+        model: root.days
+          delegate: Rectangle {
+            required property var modelData
+            width: Math.max(6, Kirigami.Units.iconSizes.small * 0.75)
+            height: width
+            radius: 3
+            color: root.colorForLevel(modelData.level)
+          }
+        }
+        MouseArea {
+          anchors.fill: parent
+          onPressed: root.expanded = !root.expanded
+      }
+    }
+
     fullRepresentation: RowLayout {
         spacing: 4
 
-        Repeater {
-            model: root.days
-            delegate: Rectangle {
-                required property var modelData
-                width: Math.max(6, Kirigami.Units.iconSizes.small * 0.75)
-                height: width
-                radius: 3
-                color: root.colorForLevel(modelData.level)
-
-
-                QQC2.ToolTip.visible: squareMouse.containsMouse
-                QQC2.ToolTip.text: root.errorMessage.length ? root.errorMessage : (modelData.date + ": " + modelData.count + " contribution" + (modelData.count === 1 ? "" : "s"))
-
-                MouseArea {
-                    id: squareMouse
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-                        if (root.username.length) {
-                            Qt.openUrlExternally("https://github.com/" + root.username);
-                        }
-                    }
-                }
-            }
+        PlasmaComponents.Label {
+          text: "Pop up"
         }
     }
 }
