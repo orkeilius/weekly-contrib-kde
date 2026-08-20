@@ -161,11 +161,28 @@ PlasmoidItem {
 
     }
 
-    fullRepresentation: RowLayout {
-        spacing: 4
+    fullRepresentation: ColumnLayout {
+        spacing: 2
 
-        PlasmaComponents.Label {
-            text: "Pop up"
+        Repeater {
+            model: root.days
+
+            delegate: RowLayout {
+                required property var modelData
+
+                PlasmaComponents.Label {
+                    text: modelData.date + " - " + modelData.count
+                }
+
+                Rectangle {
+                    width: Math.max(6, Kirigami.Units.iconSizes.small * 0.75)
+                    height: width
+                    radius: 3
+                    color: root.colorForLevel(modelData.level)
+                }
+
+            }
+
         }
 
     }
