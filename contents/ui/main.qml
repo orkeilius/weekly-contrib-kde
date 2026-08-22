@@ -115,9 +115,9 @@ PlasmoidItem {
         xhr.send();
     }
 
-    //Plasmoid.icon: "code-context"
-    //toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
-    //toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
+    Plasmoid.icon: "code-context"
+    toolTipMainText: username.length ? ("GitHub: " + username) : "Weekly Commits KDE"
+    toolTipSubText: errorMessage.length ? errorMessage : (days.length ? "Click a square for details, or open the widget for more." : "Set a username in the widget settings.")
     preferredRepresentation: compactRepresentation
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
