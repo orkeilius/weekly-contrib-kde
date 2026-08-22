@@ -7,4 +7,5 @@ ConfigModel {
         icon: "code-context"
         source: "configGeneral.qml"
     }
+
 }

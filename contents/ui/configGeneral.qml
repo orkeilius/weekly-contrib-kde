@@ -5,19 +5,20 @@ import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
 
 KCM.SimpleKCM {
-
     property alias cfg_username: usernameField.text
     property alias cfg_refreshInterval: refreshSpin.value
 
     Kirigami.FormLayout {
         QQC2.TextField {
             id: usernameField
+
             Kirigami.FormData.label: "GitHub username:"
             placeholderText: "e.g. torvalds"
         }
 
         QQC2.SpinBox {
             id: refreshSpin
+
             Kirigami.FormData.label: "Refresh every (minutes):"
             from: 5
             to: 180
@@ -30,5 +31,7 @@ KCM.SimpleKCM {
             wrapMode: Text.WordWrap
             Layout.preferredWidth: Kirigami.Units.gridUnit * 20
         }
+
     }
+
 }
